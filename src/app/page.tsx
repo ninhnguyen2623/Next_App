@@ -6,7 +6,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Hello world Ninh dev 
+          Hello world Ninh dev learn next js
         </p>
         <div>
           <a
