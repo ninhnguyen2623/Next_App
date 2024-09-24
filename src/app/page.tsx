@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import Link from 'next/link'
 import x from '@/styles/app.module.css'
 import y from '@/styles/ninhdev.module.css'
+import AppTable from '@/components/app.table'
 export default function Home() {
   return (
     <div>
@@ -15,6 +16,7 @@ export default function Home() {
         <li><Link href="/tiktok">Tiktok</Link></li>
         <li><Link href="/youtobe">Youtobe</Link></li> 
       </ul>
+      <AppTable/>
     </div>
   )
 }

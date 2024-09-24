@@ -1,7 +1,10 @@
 // import './globals.css'
 import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import AppHeader from '@/components/app.header'
+import AppTable from '@/components/app.table'
+import AppFooter from '@/components/app.footer'
+import Container from 'react-bootstrap/Container'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -18,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header>Ninhdev</header>
-        {children} 
-        <footer>End app</footer>
+       <Container>
+       <AppHeader/>
+        {children}
+        <AppFooter/> 
+       </Container>
       </body>
     </html>
   )
