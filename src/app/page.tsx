@@ -20,7 +20,8 @@ export default function Home() {
       revalidateOnReconnect: false
     }
   )
-  console.log(data)
+  if(error) return <div>failed to load</div>
+  if(isLoading) return <div>Loading...</div>
   // useEffect(()=> {
   //   const fetchData = async() => {
   //     const data = await fetch('http://localhost:8000/blogs')
@@ -41,7 +42,8 @@ export default function Home() {
         <li><Link href="/tiktok">Tiktok</Link></li>
         <li><Link href="/youtobe">Youtobe</Link></li> 
       </ul>
-      <AppTable/>
+      <AppTable
+       blogs={data}/>
     </div>
   )
 }
