@@ -2,7 +2,7 @@ const AppFooter = () => {
     return (
         <div style={{
             backgroundColor: '#ccc',
-            alignItems: 'center',
+            textAlign: 'center',
             padding: '5px 0'
         }}>
             Khóa học nextjs của Ninh dev
