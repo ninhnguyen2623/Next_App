@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
@@ -7,19 +7,30 @@ import stModal from '@/styles/app.modal.module.css'
 import { toast } from 'react-toastify'
 import { mutate } from "swr"
 interface IProps {
-  showModalCreate: boolean
-  setShowModalCreate: (value: boolean) => void
+  showModalUpdate: boolean
+  setShowModalUpdate: (value: boolean) => void
+  blog: IBlog | null
+  setBlog: (value: IBlog | null) => void
 }
-function CreateModal(props: IProps) {
+function UpdateModal(props: IProps) {
 
-  const { showModalCreate, setShowModalCreate } = props
+  const { showModalUpdate, setShowModalUpdate, blog, setBlog } = props
+  const [id, setId] = useState<number>(0)
   const [title, setTitle] = useState<string>("")
   const [author, setAuthor] = useState<string>("")
   const [content, setContent] = useState<string>("")
-  const [validationMsg, setValidationMsg] = useState('')
   const [errTitle, setErrTitle] = useState('')
   const [errAuthor, setErrAuthor] = useState('')
   const [errContent, setErrContent] = useState('')
+ 
+  useEffect(() => {
+        if(blog && blog.id){
+            setId(blog.id)
+            setTitle(blog.title)
+            setAuthor(blog.author)
+            setContent(blog.content)
+        }
+  },[blog]) 
 
   const ValidateAll = () => {
     let checker = true
@@ -51,8 +62,8 @@ function CreateModal(props: IProps) {
    }
     // console.log('check data :',title,author,content)
    if(ValidateAll() == true){
-    fetch('http://localhost:8000/blogs', {
-      method: 'POST',
+    fetch(`http://localhost:8000/blogs/${id}`, {
+      method: 'PUT',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -76,20 +87,21 @@ function CreateModal(props: IProps) {
     setErrTitle("")
     setErrAuthor("")
     setErrContent("")
-    setShowModalCreate(false)
+    setBlog(null)
+    setShowModalUpdate(false)
     toast.error("jejejee")
   }
   return (
     <>
       <Modal
-        show={showModalCreate}
+        show={showModalUpdate}
         onHide={() => handleCloseModal()}
         backdrop="static"
         keyboard={false}
         size='lg'
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
+          <Modal.Title>Modal Update</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -122,11 +134,11 @@ function CreateModal(props: IProps) {
           <Button variant="secondary" onClick={() => handleCloseModal()}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleSubmit()}>Save</Button>
+          <Button variant="warning" onClick={() => handleSubmit()}>Update</Button>
         </Modal.Footer>
       </Modal>
     </>
   );
 }
 
-export default CreateModal;
+export default UpdateModal;
