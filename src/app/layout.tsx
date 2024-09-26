@@ -23,11 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-       <Container>
+       <Container style={{minHeight: 'calc(100vh - 40px)'}}>
          <AppHeader/>
          {children}
-         <AppFooter/> 
          </Container>
+         <AppFooter/> 
          <ToastContainer />
       </body>
     </html>

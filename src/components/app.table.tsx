@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
 import styleTable from '@/styles/app.table.module.css' 
 import CreateModal from '@/components/create.modal'
+import DeleteBlog from '@/components/delete'
 import { useState } from 'react';
 import UpdateModal from './update.modal';
 import Link from 'next/link';
@@ -14,6 +15,7 @@ const AppTable = (props: IProps) => {
   const {blogs} = props;
 
   const [blog, setBlog] = useState<IBlog | null>(null)
+  const [blogDe, setDeBlog] = useState<IBlog | null>(null)
   const [showModalCreate, setShowModalCreate] = useState<boolean>(false)
   const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false)
   return (
@@ -47,11 +49,15 @@ const AppTable = (props: IProps) => {
                  onClick={() => {
                   setBlog(item)
                   setShowModalUpdate(true)
-                 }}
+                 }} 
                 >
                   Edit
                 </Button>
-                <Button variant='danger'>Delete</Button>
+                <Button variant='danger' 
+                  onClick={() => {
+                    setDeBlog(item)
+                   }} 
+                >Delete</Button>
               </td>
           </tr>
           )
@@ -69,6 +75,11 @@ const AppTable = (props: IProps) => {
       blog={blog}
       setBlog={setBlog}
     />
+    <DeleteBlog
+     Deblog={blogDe}
+     setDeBlog={setDeBlog}
+    />
+    
     </>    
     
   );
