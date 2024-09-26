@@ -22,14 +22,6 @@ export default function Home() {
   )
   if(error) return <div>failed to load</div>
   if(isLoading) return <div>Loading...</div>
-  // useEffect(()=> {
-  //   const fetchData = async() => {
-  //     const data = await fetch('http://localhost:8000/blogs')
-  //     const getData = await data.json()
-  //     console.log(getData)
-  //   }
-  //   fetchData()
-  // },[])
   return (
     <div>
       <div>{data?.length}</div>
