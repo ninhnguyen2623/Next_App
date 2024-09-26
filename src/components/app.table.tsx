@@ -1,15 +1,26 @@
 'use client'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
+import styleTable from '@/styles/app.table.module.css' 
+import CreateModal from '@/components/create.modal'
+import { useState } from 'react';
 interface IProps {
   blogs: IBlog[]
 }
 
 const AppTable = (props: IProps) => {
   const {blogs} = props;
-  console.log(' >>>> check props blogs:',blogs);
+  const [showModalCreate, setShowModalCreate] = useState<boolean>(false)
   return (
-    <Table striped bordered hover>
+    <>
+      <div>
+        <div className={styleTable['header-data-row']}>
+          <div><h3>Table Blogs</h3></div>
+          <Button variant='success' onClick={() => setShowModalCreate(true)} >Add New</Button>
+        </div>
+      </div>
+      <Table striped bordered hover>
+      
       <thead>
         <tr>
           <th>No</th> 
@@ -36,6 +47,12 @@ const AppTable = (props: IProps) => {
         
       </tbody>
     </Table>
+    <CreateModal
+      showModalCreate = {showModalCreate}
+      setShowModalCreate = {setShowModalCreate}
+    />
+    </>    
+    
   );
 }
 

@@ -5,6 +5,8 @@ import AppHeader from '@/components/app.header'
 import AppTable from '@/components/app.table'
 import AppFooter from '@/components/app.footer'
 import Container from 'react-bootstrap/Container'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer,toast } from 'react-toastify'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -25,7 +27,8 @@ export default function RootLayout({
          <AppHeader/>
          {children}
          <AppFooter/> 
-       </Container>
+         </Container>
+         <ToastContainer />
       </body>
     </html>
   )
